@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/account2.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<h1 class="text-center logo my-4">
+    <a href="{% url 'home' %}">闲聊论坛</a>
+</h1>
+{% block content %}
+
+{% endblock %}
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% load widget_tweaks form_tags%}
+
+
+{% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for error in form.non_field_errors %}
+            <p{% if forloop.last %} class="mb-0" {% endif %}>{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+{% for row in form %}
+<div class="form-group">
+    {{ row.label_tag }}
+    {% render_field row class=row|input_class %}
+    {% for error in row.errors %}
+      <div class="invalid-feedback">
+        {{ error }}
+      </div>
+    {% endfor %}
+    {% if row.help_text %}
+      <small class="form-text text-muted">
+        {{ row.help_text|safe }}
+      </small>
+    {% endif %}
+  </div>
+{% endfor %}
