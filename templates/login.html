@@ -12,6 +12,7 @@
             <h3 class="card-title text-center">登录界面</h3>
             <form method="post" novalidate>
               {% csrf_token %}
+                <input type="hidden" value="{{ next }}">
               {% include 'includes/form.html' %}
               <button type="submit" class="btn btn-primary btn-block">登录</button>
             </form>
