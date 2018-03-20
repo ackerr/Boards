@@ -1,0 +1,43 @@
+{% if is_paginated %}
+    {#    不止一页，出现分页#}
+    <nav aria-label="Topics pagination" class="mb-4">
+        <ul class="pagination">
+            {#            判断是否当前存在首页,如果有，用a标签，此时在首页，用span标签#}
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">首页</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">首页</span>
+                </li>
+            {% endif %}
+
+            {#            遍历分页数，如果页码时当前页时添加样式，显示在此页，取消a标签#}
+            {% for page_num in paginator.page_range %}
+                {% if page_obj.number == page_num %}
+                    <li class="page-item active">
+            <span class="page-link">
+              {{ page_num }}
+              <span class="sr-only">(current)</span>
+            </span>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {#            判断是否有下一页，没有取消a标签#}
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">下一页</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">下一页</span>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}

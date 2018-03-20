@@ -6,9 +6,9 @@
 {% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">主页</a></li>
     <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
-    <li class="breadcrumb-item active">New-Topic</li>
+    <li class="breadcrumb-item active">新话题</li>
 {% endblock %}
 
 {% block content %}

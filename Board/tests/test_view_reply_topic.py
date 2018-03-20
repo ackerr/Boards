@@ -6,6 +6,8 @@ from ..views import reply_topic
 
 
 class ReplyTopicTestCase(TestCase):
+
+    # 初始化一个Post
     def setUp(self):
         self.board = Board.objects.create(name='django', description='django is good.')
         self.username = 'zmj'

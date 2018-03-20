@@ -13,6 +13,7 @@ class Board(models.Model):
     def __str__(self):
         return self.name
 
+    # 自定义方法，返回需要的查询集合
     def get_posts_count(self):
         return Post.objects.filter(topic__board=self).count()
 
@@ -25,7 +26,7 @@ class Topic(models.Model):
     last_update = models.DateTimeField(auto_now_add=True)
     board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='topics')
     starter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='topics')
-    views = models.PositiveIntegerField(default=0)  # ???
+    views = models.PositiveIntegerField(default=0)  # 浏览次数，默认为0
 
     def __str__(self):
         return self.subject
@@ -33,6 +34,7 @@ class Topic(models.Model):
 
 class Post(models.Model):
     message = models.TextField()
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True)
     topic = models.ForeignKey(Topic, related_name='posts',on_delete=models.CASCADE)

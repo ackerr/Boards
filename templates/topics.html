@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ board.name }}-{{ block.super }}
+    {{ board.name }}-{{ block.super }}
 {% endblock %}
 {% block breadcrumb %}
-<li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">主页</a></li>
     <li class="breadcrumb-item active">{{ board.name }}</li>
 {% endblock %}
 
@@ -12,28 +12,27 @@
     <div class="mb-4">
         <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">新话题</a>
     </div>
-
-<table  class="table table-hover">
-    <thead class="thead-dark">
-    <tr>
-    <th>Topic</th>
-    <th>Starer</th>
-    <th>Replies</th>
-    <th>Views</th>
-    <th>Last Update</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for topic in topics %}
-    <tr>
-        <td><a href="{% url 'topic_posts' board.pk topic.pk %}">{{ topic.subject }}</a></td>
-        <td>{{ topic.starter.username }}</td>
-        <td>{{ topic.replies }}</td>
-        <td>{{ topic.views }}</td>
-        <td>{{ topic.last_update }}</td>
-    </tr>
-    {% endfor %}
-
-    </tbody>
-</table>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>话题</th>
+            <th>发起者</th>
+            <th>回复数</th>
+            <th>浏览次数</th>
+            <th>最近更新时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for topic in topics %}
+            <tr>
+                <td><a href="{% url 'topic_posts' board.pk topic.pk %}">{{ topic.subject }}</a></td>
+                <td>{{ topic.starter.username }}</td>
+                <td>{{ topic.replies }}</td>
+                <td>{{ topic.views }}</td>
+                <td>{{ topic.last_update }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include 'includes/pagination.html' %}
 {% endblock %}
