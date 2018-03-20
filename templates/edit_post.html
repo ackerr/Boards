@@ -1,7 +1,13 @@
 {% extends  'base.html' %}
+{% load static %}
+
 
 {% block title %}
     编辑帖子
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/simplemde.min.css' %}">
 {% endblock %}
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">主页</a></li>
@@ -20,4 +26,10 @@
         <a href="{% url 'topic_posts' post.topic.board.pk post.topic.pk %}" class="btn btn-outline-secondary"
            role="button">取消</a>
     </form>
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'js/simplemde.min.js' %}"></script>
+    <script>
+    var simplemde = new SimpleMDE();
+    </script>
 {% endblock %}

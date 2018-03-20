@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">个人信息</li>
+{% endblock %}
+
+
+{% block title %}
+    个人信息
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <form method="post">
+                {% csrf_token %}
+                {% include 'includes/form.html' %}
+                <input type="submit" class="btn btn-success" value="确认修改">
+            </form>
+        </div>
+    </div>
+{% endblock %}

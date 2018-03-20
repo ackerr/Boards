@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block title %}
     {{ board.name }}-{{ block.super }}
 {% endblock %}
@@ -24,12 +26,28 @@
         </thead>
         <tbody>
         {% for topic in topics %}
+            {% url 'topic_posts' board.pk topic.pk as topic_url %}
             <tr>
-                <td><a href="{% url 'topic_posts' board.pk topic.pk %}">{{ topic.subject }}</a></td>
-                <td>{{ topic.starter.username }}</td>
-                <td>{{ topic.replies }}</td>
-                <td>{{ topic.views }}</td>
-                <td>{{ topic.last_update }}</td>
+                <td>
+                    <p class="mb-0">
+                        <a href="{{ topic_url }}">{{ topic.subject }}</a>
+                    </p>
+                    <small class="text-muted">
+                        pages:
+                        {% for i in topic.get_page_range %}
+                            <a href="{{ topic_url }}?page={{ i }}">{{ i }}</a>
+                        {% endfor %}
+                        {% if topic.has_many_pages %}
+                            ...
+                            <a href="{{ topic_url }}?page={{ topic.get_page_count }}">最后一页</a>
+                        {% endif %}
+                    </small>
+                </td>
+                <td class="align-middle">{{ topic.starter.username }}</td>
+                <td class="align-middle">{{ topic.replies }}</td>
+                <td class="align-middle">{{ topic.views }}</td>
+                {#                将时间个性化，多少时间之前#}
+                <td class="align-middle">{{ topic.last_update|naturaltime }}</td>
             </tr>
         {% endfor %}
         </tbody>

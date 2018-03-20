@@ -11,7 +11,7 @@ class ReplyTopicTestCase(TestCase):
     def setUp(self):
         self.board = Board.objects.create(name='django', description='django is good.')
         self.username = 'zmj'
-        self.password = '123'
+        self.password = 'zmjzmj123'
         user = User.objects.create(username=self.username, password=self.password, email='zmj@12.com')
         self.topic = Topic.objects.create(subject='python', starter=user, board=self.board)
         Post.objects.create(message='this is a test', topic=self.topic, created_by=user)
@@ -27,7 +27,10 @@ class ReplyTopicTests(ReplyTopicTestCase):
 
 
 class SuccessfulReplyTopicTests(ReplyTopicTestCase):
-    pass
+    def test_redirect(self):
+        url = reverse('topic_posts',kwargs={'pk':self.board.pk,'topic_pk':self.topic.pk})
+        topic_posts_url='{url}?page=1#2'.format(url=url)
+        self.assertRedirects(self.response,topic_posts_url)
 
 
 class InvalidReplyTopicTests(ReplyTopicTestCase):
