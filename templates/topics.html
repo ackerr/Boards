@@ -33,13 +33,12 @@
                         <a href="{{ topic_url }}">{{ topic.subject }}</a>
                     </p>
                     <small class="text-muted">
-                        pages:
+                        Pages:
                         {% for i in topic.get_page_range %}
                             <a href="{{ topic_url }}?page={{ i }}">{{ i }}</a>
                         {% endfor %}
                         {% if topic.has_many_pages %}
-                            ...
-                            <a href="{{ topic_url }}?page={{ topic.get_page_count }}">最后一页</a>
+                            ... <a href="{{ topic_url }}?page={{ topic.get_page_count }}">末页</a>
                         {% endif %}
                     </small>
                 </td>
