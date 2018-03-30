@@ -22,7 +22,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('home/', views.home, name='home'),
-    path('home/', views.BoardListView.as_view(), name='home'),  # GCBV home
+    path('', views.BoardListView.as_view(), name='home'),  # GCBV home
     # path('boards/<int:pk>/', views.board_topics, name='board_topics'),
     path('boards/<int:pk>/', views.TopicListView.as_view(), name='board_topics'),
     path('boards/<int:pk>/new/', views.new_topic, name='new_topic'),
